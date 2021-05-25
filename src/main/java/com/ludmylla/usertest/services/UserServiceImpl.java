@@ -13,7 +13,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        User userCreated = userRepository.save(user);
-        return userCreated;
+        return userRepository.save(user);
+
     }
 }
