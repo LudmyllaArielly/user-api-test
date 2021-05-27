@@ -1,12 +1,19 @@
 package com.ludmylla.usertest.resource;
 
-import com.ludmylla.usertest.entities.dto.UserCreateDTO;
-import com.ludmylla.usertest.model.entities.User;
-import com.ludmylla.usertest.services.UserService;
-import org.modelmapper.ModelMapper;
-import org.springframework.web.bind.annotation.*;
+import static org.springframework.http.HttpStatus.CREATED;
 
-import static org.springframework.http.HttpStatus.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.ludmylla.usertest.mapper.UserMapper;
+import com.ludmylla.usertest.model.entities.User;
+import com.ludmylla.usertest.model.entities.dto.UserCreateDTO;
+import com.ludmylla.usertest.services.UserService;
 
 @RestController
 @RequestMapping("/users")
@@ -21,11 +28,10 @@ public class UserResource {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public UserCreateDTO createUser (@RequestBody UserCreateDTO userCreateDTO){
-    	ModelMapper modelMapper = new ModelMapper();
-        User user = modelMapper.map(userCreateDTO, User.class);
-        user = userService.createUser(user);
-        return modelMapper.map(user, UserCreateDTO.class);
+    public ResponseEntity<UserCreateDTO> createUser (@RequestBody UserCreateDTO userCreateDTO){
+    	User user = UserMapper.INSTANCE.toUser(userCreateDTO);
+    	userService.createUser(user);
+    	return ResponseEntity.status(HttpStatus.CREATED).build();
 
     }
 

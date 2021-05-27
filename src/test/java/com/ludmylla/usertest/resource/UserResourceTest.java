@@ -22,8 +22,8 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ludmylla.usertest.entities.dto.UserCreateDTO;
 import com.ludmylla.usertest.model.entities.User;
+import com.ludmylla.usertest.model.entities.dto.UserCreateDTO;
 import com.ludmylla.usertest.services.UserService;
 
 @ExtendWith(SpringExtension.class)
@@ -64,7 +64,7 @@ public class UserResourceTest {
 
         mvc.perform(request)
                 .andExpect(status().isCreated())
-                //.andExpect(jsonPath("id").isNotEmpty())
+                .andExpect(jsonPath("id").isNotEmpty())
                 .andExpect(jsonPath("firstName").value(dto.getFirstName()))
                 .andExpect(jsonPath("lastName").value(dto.getLastName()))
                 .andExpect(jsonPath("cpf").value(dto.getCpf()))
