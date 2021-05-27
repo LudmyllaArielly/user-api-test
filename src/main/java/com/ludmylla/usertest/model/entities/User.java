@@ -29,6 +29,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String cpf;
+
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)
     private LocalDate dateOfBirth;

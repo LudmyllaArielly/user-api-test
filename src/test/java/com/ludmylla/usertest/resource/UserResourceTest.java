@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.time.LocalDate;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -73,8 +74,24 @@ public class UserResourceTest {
 
     }
 
+    @Test
+    @DisplayName("Should throw a validation error, when there is not enough data to create the user")
+    public void createUser_ShouldGenerateAnErrorIfThereIsNotEnoughDataToCreateTheUser() throws  Exception {
+        String json = new ObjectMapper().writeValueAsString(new UserCreateDTO());
+
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post(USER_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        mvc.perform(request)
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("errors", Matchers.hasSize(4)));
+
+    }
+
     private UserCreateDTO createNewUser() {
-       return UserCreateDTO.builder()
+        return UserCreateDTO.builder()
                 .id(1L)
                 .firstName("Maria")
                 .lastName("Silva")
@@ -82,4 +99,5 @@ public class UserResourceTest {
                 .dateOfBirth(date)
                 .build();
     }
+
 }
