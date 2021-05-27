@@ -1,7 +1,7 @@
 package com.ludmylla.usertest.resource;
 
-import com.ludmylla.usertest.entities.User;
 import com.ludmylla.usertest.entities.dto.UserCreateDTO;
+import com.ludmylla.usertest.model.entities.User;
 import com.ludmylla.usertest.services.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;

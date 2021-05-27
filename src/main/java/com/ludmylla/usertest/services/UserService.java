@@ -1,6 +1,6 @@
 package com.ludmylla.usertest.services;
 
-import com.ludmylla.usertest.entities.User;
+import com.ludmylla.usertest.model.entities.User;
 
 public interface UserService {
 

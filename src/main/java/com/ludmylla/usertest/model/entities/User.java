@@ -1,4 +1,4 @@
-package com.ludmylla.usertest.entities;
+package com.ludmylla.usertest.model.entities;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
