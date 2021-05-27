@@ -43,7 +43,7 @@ public class UserResourceTest {
     
     @Test
     @DisplayName("Create a user successfully")
-    public void createUserTest() throws Exception{
+    public void createUser_shouldReturnSuccess() throws Exception{
         UserCreateDTO dto = createNewUser();
 
         User userSaved = User.builder()

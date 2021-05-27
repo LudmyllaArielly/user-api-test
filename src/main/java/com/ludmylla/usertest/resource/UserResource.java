@@ -27,11 +27,14 @@ public class UserResource {
     }
 
     @PostMapping
-    @ResponseStatus(CREATED)
+    //@ResponseStatus(CREATED)
     public ResponseEntity<UserCreateDTO> createUser (@RequestBody UserCreateDTO userCreateDTO){
     	User user = UserMapper.INSTANCE.toUser(userCreateDTO);
     	userService.createUser(user);
-    	return ResponseEntity.status(HttpStatus.CREATED).build();
+    	//return userCreateDTO;
+        return ResponseEntity.status(CREATED).body(userCreateDTO);
+
+
 
     }
 
